@@ -9,14 +9,16 @@ import SetQuantity from "../components/products/SetQuantity"
 import { useCart } from "@/hooks/useCart" 
 
 interface ItemContentProps { 
-    item: CartProductType
+    item: any // Change back to CartProductType
 }
 
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => { 
   
     const { handleRemoveProductFromCart, 
         handleCartQtyIncrease, handleCartQtyDecrease
-  } = useCart(); 
+  } = useCart();  
+
+  console.log(item.image); 
     
   return ( 
     <div
