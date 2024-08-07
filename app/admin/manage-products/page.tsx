@@ -5,40 +5,26 @@ import ManageProductsClient from "./ManageProductsClient";
 import getProducts from "@/actions/getProducts"; 
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import prisma from '@/libs/prismadb';
-import { GetServerSideProps } from "next";
-import { Product } from '@prisma/client';
 
-interface ManageProductsPageProps {
-  data: Product[];
-}
 
-async function fetchProducts(category: string): Promise<Product[]> {
-  const products = await prisma.product.findMany({
-    where: { category },
-  });
-  return products;
-}
 
-const ManageProductsPage = async ({ searchParams }: { searchParams: { category?: string } }) => {
-  const category = searchParams.category;
+const ManageProducts = async () => { 
 
-  if (!category) {
-    return (
-      <div>
-        <h1>Category not found</h1>
-      </div>
-    );
+  const products = await getProducts({})  
+  const currentUser = await getCurrentUser(); 
+
+  // If the user is not an admin. 
+  if(!currentUser || currentUser.role !== 'ADMIN'){
+    return <NullData title="Oops! Access Denied" />
   }
 
-  const data = await fetchProducts(category);
-
   return (
-    <div className="pt-8">
-      <Container>
-        <ManageProductsClient products={data} />
+    <div className="pt-8"> 
+      <Container> 
+          <ManageProductsClient products={products} /> 
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default ManageProductsPage;
+export default ManageProducts;
