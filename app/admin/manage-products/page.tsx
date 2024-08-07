@@ -8,41 +8,30 @@ import prisma from '@/libs/prismadb';
 import { GetServerSideProps } from "next";
 import { Product } from '@prisma/client';
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { category } = context.query;
-
-  if (!category || typeof category !== 'string') {
-    return {
-      notFound: true,
-    };
-  }
-
-  try {
-    // Fetch data based on the category
-    const data = await prisma.product.findMany({
-      where: {
-        category: category,
-      },
-    });
-
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return {
-      notFound: true,
-    };
-  }
-}; 
-
 interface ManageProductsPageProps {
   data: Product[];
 }
 
-const ManageProductsPage: React.FC<ManageProductsPageProps> = ({ data }) => {
+async function fetchProducts(category: string): Promise<Product[]> {
+  const products = await prisma.product.findMany({
+    where: { category },
+  });
+  return products;
+}
+
+const ManageProductsPage = async ({ searchParams }: { searchParams: { category?: string } }) => {
+  const category = searchParams.category;
+
+  if (!category) {
+    return (
+      <div>
+        <h1>Category not found</h1>
+      </div>
+    );
+  }
+
+  const data = await fetchProducts(category);
+
   return (
     <div className="pt-8">
       <Container>
