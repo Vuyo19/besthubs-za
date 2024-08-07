@@ -2,15 +2,12 @@ import Container from "./components/Container";
 import Image from "next/image";
 import HomeBanner from "./components/HomeBanner";
 import ProductCardFlavours from "./components/products/ProductCardFlavours";
-import getProducts, { IProductParams } from "@/actions/getProducts";
+import getProducts from "@/actions/getProducts";
 
-interface HomeProps {
-  searchParams: IProductParams
-}
 
-export default async function Home({searchParams}: HomeProps) {
+export default async function Home() {
   
-  const products = await getProducts(searchParams);
+  const products = await getProducts();
 
   return (
     <div>  
