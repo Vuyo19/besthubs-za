@@ -10,7 +10,7 @@ import prisma from '@/libs/prismadb';
 
 const ManageProducts = async () => { 
 
-  const products = await getProducts({})  
+  const products = await getProducts()  
   const currentUser = await getCurrentUser(); 
 
   // If the user is not an admin. 
