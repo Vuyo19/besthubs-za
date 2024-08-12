@@ -75,7 +75,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
             {/* Nav Items Laptop */} 
             <div className="hidden lg:flex items-center ml-[12rem] gap-4">
                 
-                <div className={`mt-4 pb-4 ${isActive("/")}`}>
+                <div className={`mt-4 pb-4`}>
                     <Link
                         className="flex items-center text-white font-medium focus:outline-none mx-2 text-sm md:text-sm lg:text-base xl:text-md"
                         href="/"
@@ -84,7 +84,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
                     </Link>
                 </div>   
 
-                <div className={`mt-4 pb-4 ${isActive("/about-us")}`}>
+                <div className={`mt-4 pb-4`}>
                     <Link
                         className="flex items-center text-white font-medium focus:outline-none mx-2 text-sm md:text-sm lg:text-base xl:text-md"
                         href="/about-us"
@@ -96,11 +96,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
 
                 <div
                     ref={dropdownRef}
-                    className={`relative inline-block text-left mt-4 pb-4 ${
-                        isActive("/shop-flavour") ||
-                        isActive("/shop-pipe") ||
-                        isActive("/product-detail")
-                    }`}
+                    className={`relative inline-block text-left mt-4 pb-4`}
                     >  
 
                     <button
