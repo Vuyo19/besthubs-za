@@ -32,9 +32,8 @@ const Button: React.FC<ButtonProps> = ({
             w-full border-secondary
             flex items-center
             justifty-center 
-            text-center
-            gap-2 ${outline ? "bg-white" : "bg-secondary"} 
-            ${outline ? "text-secondary" : "text-white"} 
+            gap-2 ${outline ? "bg-white" : "bg-amazon-green"} 
+            ${outline ? "text-amazon-green" : "text-white"} 
             ${small ? "text-sm font-light" : "text-md font-semibold"}
             ${small ? "py-1 px-2 border-[1px]" : "py-3 px-4 border-2"}
             ${custom ? custom : ''}

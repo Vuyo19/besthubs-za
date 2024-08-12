@@ -62,9 +62,8 @@ const LoginForm: React.FC<LoginFormProps>= ({ currentUser }) => {
   }
 
   return (
-    <> 
-        <Heading title="Sign in to BestHubs" /> 
-        <hr className="bg-slate-300 w-full h-px" /> 
+    <div className="flex flex-col gap-5"> 
+
         <Button outline label="Continue with Google" 
             onClick={() => {signIn('google')}} /> 
 
@@ -98,7 +97,7 @@ const LoginForm: React.FC<LoginFormProps>= ({ currentUser }) => {
         </Link> </p>  
      
 
-    </>
+    </div>
   )
 }
 

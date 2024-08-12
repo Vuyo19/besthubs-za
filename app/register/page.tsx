@@ -3,6 +3,7 @@ import Container from '../components/Container';
 import FormWrap from '../components/FormWrap';
 import RegisterForm from './RegisterForm'; 
 import { getCurrentUser } from '@/actions/getCurrentUser';
+import AuthenticationContainer from '../components/AuthenticationContainer';
 
 const Register = async () => { 
  
@@ -10,9 +11,9 @@ const Register = async () => {
 
   return (
     <Container>
-        <FormWrap>
+        <AuthenticationContainer auth={'Sign Up'}>
             <RegisterForm currentUser={currentUser} /> 
-        </FormWrap>
+        </AuthenticationContainer>
     </Container>
   ); 
   

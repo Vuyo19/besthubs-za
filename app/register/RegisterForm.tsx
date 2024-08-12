@@ -74,11 +74,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
   }
 
   return (
-   <> 
-        <Heading title='Continue with Best Hubs' />
-        <hr className="bg-slate-300 w-full h-px" /> 
-
-        <Button  outline label="Sign up with Google" 
+   <div className='flex flex-col gap-5'> 
+        <Button outline label="Sign up with Google" 
             onClick={() => {signIn('google')}} />
         
         <Input 
@@ -116,7 +113,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
             underline" href='/login'> 
             Log in
         </Link> </p> 
-   </>
+   </div>
   )
 }
 

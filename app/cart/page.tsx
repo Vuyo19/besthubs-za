@@ -4,7 +4,7 @@ import CartClient from "./CartClient";
 
 const Cart = async () => {
   return (
-    <div className='pt-8'>
+    <div className='mt-[100px] lg:mt-[120px]'>
         <Container> 
             <CartClient />
         </Container>

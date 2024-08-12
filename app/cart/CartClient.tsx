@@ -31,6 +31,8 @@ const CartClient = () => {
           </div>
         )
       }  
+
+
     
 
     return (
@@ -38,7 +40,7 @@ const CartClient = () => {
             <Heading title="Shopping Cart" center /> 
             <div className="grid grid-cols-5 
                 text-xs gap-4 pb-2 items-center
-                mt-8 
+                mt-8
                 "> 
                 <div className="col-span-2 justify-self-start"> PRODUCT </div>
                 <div className="justify-self-center"> PRICE </div>
@@ -63,6 +65,9 @@ const CartClient = () => {
                     </div> 
                     <p className="text-slate-500"> Taxes and shipping calculated at checkout </p>
                     <Button label='Checkout' /> 
+                    <Link href="/quotation">
+                        <Button label='Generate Quotation' outline />
+                    </Link>
                     <Link href={"/"} className="text-slate-500 flex items-center gap-1 mt-2">  
                         <IoArrowBackCircle /> 
                         <span> Continue Shopping </span>

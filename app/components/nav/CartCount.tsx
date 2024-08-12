@@ -8,7 +8,9 @@ export const CartCount = () => {
 
     const router = useRouter(); 
     return (
-      // Pointing to the cursor-pointer. 
+      // Pointing to the cursor-pointer.  
+
+      // OLD CODE. 
       <div className="relative cursor-pointer" 
       onClick={() => router.push('/cart')}>
           <div className="text-3xl"> 

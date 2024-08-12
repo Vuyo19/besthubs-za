@@ -3,6 +3,9 @@ import Image from "next/image";
 import HomeBanner from "./components/HomeBanner";
 import ProductCardFlavours from "./components/products/ProductCardFlavours";
 import getProducts from "@/actions/getProducts";
+import Hero from "./components/hero/Hero";
+import ProductsHomepage from "./components/products/ProductsHomepage";
+import ShopCategories from "./components/category/ShopCategories";
 
 
 export default async function Home() {
@@ -10,26 +13,20 @@ export default async function Home() {
   const products = await getProducts();
 
   return (
-    <div>  
+    <div>   
+
       <div> 
-        <HomeBanner />
-      </div> 
+        <Hero />
+      </div>  
+
       <div className="p-8"> 
         <Container> 
-            <div>  
-              <div className="mb-5"> 
-                <h2 className="text-3xl font-bold text-slate-700"> Browse Shisha Flavours </h2>
-              </div>
-              <div 
-                className="grid grid-cols-2 sm:grid-grid-cols-3 
-                lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap:10"> 
-                  {products.map((product: any) => {
-                    return <ProductCardFlavours key={product.id} data={product} />
-                  })}
-              </div>
-            </div>
-        </Container>
-      </div>
+            <ProductsHomepage products={products} /> 
+        </Container> 
+      </div> 
+      
+      <ShopCategories /> 
+
     </div>
   );
 }
