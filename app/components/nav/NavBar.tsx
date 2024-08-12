@@ -59,9 +59,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
     setIsDropdownOpen(false);
   };
 
-  const isActive = (path: any) => {
-    return location.pathname === path ? "border-b-2" : "";
-  };
+  const isActive = true
 
   return ( 
 
