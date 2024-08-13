@@ -39,10 +39,6 @@ const Quotation = () => {
 
  const componentRef = useRef(null); 
 
- const handlePrint = () => {
-    window.print() 
- } 
-
   return (
     <div className='m-5 p-5 mt-[100px] md:max-w-xl md:mx-auto xl:max-w-4xl lg:max-w-2xl lg:mx-auto rounded shadow-lg'>
       
@@ -55,7 +51,7 @@ const Quotation = () => {
             content={() => componentRef.current} /> 
 
             <div ref={componentRef}> 
-              <Header handlePrint={handlePrint} />  
+              <Header />  
 
               <MainDetails />     
 

@@ -5,19 +5,22 @@ import getFavouriteProductsByUser from '@/actions/getFavouriteProductsByUser'
 import { useFavourites } from '@/hooks/useFavourite'
 import { getCurrentUser } from '@/actions/getCurrentUser'
 import { NextResponse } from 'next/server'
+import router from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const MyFavourites = async () => {   
 
-  const currentUser = await getCurrentUser(); 
+  const router = useRouter(); 
+  const currentUser = await getCurrentUser();  
 
   if(!currentUser) {
-    return NextResponse.error()
+    return router.push('/login')
   } 
 
   const favourites = await getFavouriteProductsByUser(currentUser.id)  
 
   if(!favourites) {
-    return NextResponse.error()
+    return router.push('/')
   }
 
   return (

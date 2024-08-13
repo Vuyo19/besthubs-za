@@ -2,11 +2,9 @@
 
 import React from 'react' 
 
-interface HeaderProps {
-    handlePrint: () => void; 
-}
 
-const Header: React.FC<HeaderProps> = ({ handlePrint }) => {
+
+const Header = ({  }) => {
   return (
     <> 
         <header className='flex flex-col items-center justify-center mb-5 xl:flex-row xl:justify-between'> 
