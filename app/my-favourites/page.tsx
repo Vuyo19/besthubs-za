@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Favourites from './Favourites'
 import Container from '../components/Container'
 import getFavouriteProductsByUser from '@/actions/getFavouriteProductsByUser'
-import { useFavourites } from '@/hooks/useFavourite'
 import { getCurrentUser } from '@/actions/getCurrentUser'
-import { NextResponse } from 'next/server'
-import router from 'next/router'
-import { useRouter } from 'next/navigation'
 
 const MyFavourites = async () => {   
 
-  const router = useRouter(); 
   const currentUser = await getCurrentUser();  
 
   if(!currentUser) {
-    return router.push('/login')
+    return null
   } 
 
   const favourites = await getFavouriteProductsByUser(currentUser.id)  
 
   if(!favourites) {
-    return router.push('/')
+    return null
   }
 
   return (
