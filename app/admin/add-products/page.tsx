@@ -7,14 +7,14 @@ import Heading from '@/app/components/Heading'
 import { Input } from '@/app/components/inputs/input' 
 import NullData from '@/app/components/NullData'; 
 import { getCurrentUser } from '@/actions/getCurrentUser'; 
-
+import RedirectUser from "../../components/RedirectUser"
 
 const AddProducts = async() => { 
 
   const currentUser = await getCurrentUser(); 
 
   if(!currentUser || currentUser.role !== 'ADMIN') {
-    return <NullData title='Oops! Access Denied' />
+    return <RedirectUser />
   }
 
   return (

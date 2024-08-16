@@ -5,7 +5,7 @@ import ManageProductsClient from "./ManageProductsClient";
 import getProducts from "@/actions/getProducts"; 
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import prisma from '@/libs/prismadb';
-
+import RedirectUser from "../../components/RedirectUser"
 
 
 const ManageProducts = async () => { 
@@ -13,10 +13,10 @@ const ManageProducts = async () => {
   const products = await getProducts()  
   const currentUser = await getCurrentUser(); 
 
-  // If the user is not an admin. 
-  if(!currentUser || currentUser.role !== 'ADMIN'){
-    return <NullData title="Oops! Access Denied" />
+  if(!currentUser || currentUser.role !== 'ADMIN') {
+    return <RedirectUser />
   }
+
 
   return (
     <div className="pt-8"> 

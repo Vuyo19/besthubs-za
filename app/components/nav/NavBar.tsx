@@ -57,6 +57,11 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
 
   const closeDropdown = () => {
     setIsDropdownOpen(false);
+  }; 
+
+  const handleSignOut = () => {
+    toggleMenuItems(); // This function will be called first
+    signOut();        // Then this function will be called
   };
 
   const isActive = true
@@ -149,12 +154,14 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
             <div className="lg:hidden absolute top-[4.5rem] left-0 w-full bg-mystique-green border-t text-white">
                 <div className="container mx-auto py-2 w-full pr-6 pl-6">
                     <Link
+                        onClick={toggleMenuItems}
                         href="/"
                         className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
                     >
                         <span className="ml-4 text-md font-medium">Home</span>
                     </Link>
                     <Link
+                        onClick={toggleMenuItems}
                         href="/about-us"
                         className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
                     >
@@ -162,34 +169,82 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
                     </Link>
 
                     <div className="relative mt-6 mb-4 mx-auto text-left px-4">
-                    <button
-                        onClick={toggleNested}
-                        type="button"
-                        className="py-3 inline-flex items-center gap-x-2 ml-4 text-md font-medium rounded-lg text-white disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                        Products
-                        {isNestedOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                    </button>
+                        <button
+                            onClick={toggleNested}
+                            type="button"
+                            className="py-3 inline-flex items-center gap-x-2 ml-4 text-md font-medium rounded-lg text-white disabled:opacity-50 disabled:pointer-events-none"
+                        >
+                            Products
+                            {isNestedOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        </button>
 
-                    <div
-                        className={`transition-opacity transition-margin duration-300 ${
-                        isNestedOpen ? "opacity-100 mt-4" : "opacity-0 hidden"
-                        } min-w-[15rem] bg-amazon-green shadow-md rounded-lg p-2 divide-y divide-gray-200 border border-zinc-100 dark:divide-gray-700`}
-                    >
-                        <div className="py-2 first:pt-0 last:pb-0">
-                        <Link href="/dummy">
-                            <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 dark:hover:text-white">
-                                Shop Shisha Flavour
+                        <div
+                            className={`transition-opacity transition-margin duration-300 ${
+                            isNestedOpen ? "opacity-100 mt-4" : "opacity-0 hidden"
+                            } min-w-[15rem] bg-amazon-green shadow-md rounded-lg p-2 divide-y divide-gray-200 border border-zinc-100 dark:divide-gray-700`}
+                        >
+                            <div className="py-2 first:pt-0 last:pb-0">
+                            <Link href="/dummy" onClick={toggleMenuItems}>
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 dark:hover:text-white">
+                                    Shop Shisha Flavour
+                                </div>
+                            </Link>
+                            <Link href="/dummy" onClick={toggleMenuItems}>
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 dark:hover:text-white">
+                                Shop Shisha Pipe
+                                </div>
+                            </Link>
                             </div>
-                        </Link>
-                        <Link href="/dummy">
-                            <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-300 dark:hover:text-white">
-                            Shop Shisha Pipe
-                            </div>
-                        </Link>
                         </div>
-                    </div>
-                    </div>
+                    </div>   
+
+                    {currentUser ? (
+                        <> 
+                            <Link
+                                href="/account"
+                                onClick={toggleMenuItems}
+                                className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
+                            >
+                                <span className="ml-4 text-md font-medium"> My Account </span>
+                            </Link> 
+                            <Link href="/cart" onClick={toggleMenuItems} className="flex items-center py-2 pl-4 w-full pr-10 mb-4">
+                                <span className="ml-4 text-md font-medium mr-2"> Cart </span>
+                                <button className="relative flex items-center font-medium text-white/[.8] hover:text-white sm:my-6 sm:ps-6">
+                                <FiShoppingBag size={24} />
+                                <div className="absolute top-[-5px] left-4 w-4 h-4 bg-[#8fbc8f] text-white rounded-full flex items-center justify-center text-xs">
+                                    { cartTotalQty }
+                                </div>
+                                </button>
+                            </Link>
+                            <button
+                                onClick={handleSignOut}
+                                className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
+                            >
+                                <span className="ml-4 text-md font-medium"> Sign Out </span>
+                            </button>
+                        </> 
+                    ) : (
+                        <> 
+                            <Link
+                                onClick={toggleMenuItems}
+                                href="/login"
+                                className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
+                            >
+                                <span className="ml-4 text-md font-medium"> Login </span>
+                            </Link>
+                            <Link
+                                onClick={toggleMenuItems}
+                                href="/register"
+                                className="flex items-center py-2 pl-4 w-full pr-10 mb-4"
+                            >
+                                <span className="ml-4 text-md font-medium"> Register </span>
+                            </Link>
+                        </>
+                    )}
+
+                   
+
+
                 </div>
             </div>
             )} 
@@ -219,10 +274,14 @@ const NavBar: React.FC<NavBarProps> = ({ currentUser }) => {
                     {/* Conditionally render based on user authentication */}
                         {currentUser ? (
 
-                                <> 
-                                    <button onClick={() => {signOut()}} className="py-3 px-4 inline-flex items-center gap-x-2 text-md font-semibold rounded-lg border bg-amazon-green text-gray-100 hover:bg-white  hover:text-amazon-green whitespace-nowrap">
-                                        My Account
-                                    </button>
+                                <>  
+                                    <Link href="/account"> 
+                                        <button className="py-3 px-4 inline-flex items-center gap-x-2 text-md font-semibold rounded-lg border bg-amazon-green text-gray-100 hover:bg-white  hover:text-amazon-green whitespace-nowrap">
+                                            My Account
+                                        </button> 
+                                    </Link> 
+                                    
+
                                     <button onClick={() => {signOut()}} className="py-3 px-4 inline-flex items-center gap-x-2 text-md font-semibold rounded-lg border bg-amazon-green text-gray-100 hover:bg-white  hover:text-amazon-green whitespace-nowrap">
                                         Sign Out
                                     </button>

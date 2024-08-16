@@ -8,7 +8,9 @@ export const metadata = {
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     return (
       <div>
-          <AdminNav /> 
+          <div className="pt-28"> 
+            <AdminNav /> 
+          </div>
           {children}
       </div>
     )
